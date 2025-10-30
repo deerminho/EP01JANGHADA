@@ -51,6 +51,16 @@
                 </div>
             </div>
 
+            <!-- 볼륨 조절 바 -->
+            <div class="max-w-md mx-auto mb-4">
+                <div class="flex items-center gap-3 bg-gray-50 rounded-lg p-3 border-2 border-gray-200">
+                    <span class="text-2xl">🔊</span>
+                    <input type="range" id="volume-slider" min="0" max="100" value="50" 
+                           class="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-teal-500">
+                    <span id="volume-display" class="text-sm font-bold text-gray-700 min-w-[3rem]">50%</span>
+                </div>
+            </div>
+
             <!-- 썸네일 + 노래 제목 -->
             <div class="text-center">
                 <a id="thumbnail-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-block">
@@ -147,6 +157,21 @@
         function onPlayerReady(event) {
             // 페이지 로드시 1회만 통계 가져오기
             loadStats();
+            
+            // 저장된 볼륨 불러오기 (기본값 50)
+            const savedVolume = localStorage.getItem('playerVolume') || 50;
+            player.setVolume(savedVolume);
+            document.getElementById('volume-slider').value = savedVolume;
+            document.getElementById('volume-display').textContent = savedVolume + '%';
+            
+            // 볼륨 슬라이더 이벤트
+            const volumeSlider = document.getElementById('volume-slider');
+            volumeSlider.addEventListener('input', function() {
+                const volume = this.value;
+                player.setVolume(volume);
+                document.getElementById('volume-display').textContent = volume + '%';
+                localStorage.setItem('playerVolume', volume);
+            });
             
             setTimeout(() => {
                 playFromStart();

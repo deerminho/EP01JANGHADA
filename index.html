@@ -24,7 +24,6 @@
             }
         }
     </style>
-</h1>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-100 p-2 md:p-4">
     <div class="max-w-4xl mx-auto">
@@ -32,9 +31,9 @@
         <!-- 헤더 -->
         <div class="text-center mb-4 md:mb-6">
             <h1 class="text-xl md:text-3xl lg:text-4xl font-bold text-gray-800">
-              
+                민호특공대 실시간 총공 현황
             </h1>
- </div>
+        </div>
 
         <!-- 비디오 플레이어 섹션 -->
         <div class="bg-white rounded-2xl p-3 md:p-6 mb-4 md:mb-6 shadow-lg border-2 border-teal-300">
@@ -95,7 +94,7 @@
         const VIDEO_ID = 'ZJo6KHpI-2k';
         const MIN_TIME = 65;
         const MAX_TIME = 95;
-        const API_KEY = 'AIzaSyBUIRqRx4stjSKSlPQG06faKzLWOXfK1j4';
+        const API_KEY = 'AIzaSyBwN15hyGAr9xNJQEfLMLdkNTFNaVG7mAk';
         
         let player;
         let checkInterval;
@@ -146,10 +145,8 @@
 
         // 플레이어 준비 완료
         function onPlayerReady(event) {
+            // 페이지 로드시 1회만 통계 가져오기
             loadStats();
-            
-            // 60초마다 통계 업데이트
-            setInterval(loadStats, 60000);
             
             setTimeout(() => {
                 playFromStart();
@@ -224,7 +221,7 @@
                         }
                     }
                     
-                    console.log('✅ 통계 업데이트 완료 (60초마다)');
+                    console.log('✅ 통계 로드 완료 (F5로 새로고침하여 최신 통계 확인)');
                 }
             } catch (error) {
                 console.error('YouTube API 에러:', error);
@@ -236,8 +233,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
